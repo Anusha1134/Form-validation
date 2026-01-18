@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login & Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        a {
+            color: blue;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="formTitle">Signup</h2>
+
+    <div id="signupForm">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="signupEmail" placeholder="Email">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <div class="error" id="signupError"></div>
+        <button onclick="signup()">Signup</button>
+    </div>
+
+    <div id="loginForm" style="display:none;">
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <div class="error" id="loginError"></div>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <p>
+        <span id="toggleText">Already have an account?</span>
+        <a onclick="toggleForm()">Login</a>
+    </p>
+</div>
+
+<script>
+    function toggleForm() {
+        const signupForm = document.getElementById("signupForm");
+        const loginForm = document.getElementById("loginForm");
+        const formTitle = document.getElementById("formTitle");
+        const toggleText = document.getElementById("toggleText");
+
+        if (signupForm.style.display === "none") {
+            signupForm.style.display = "block";
+            loginForm.style.display = "none";
+            formTitle.innerText = "Signup";
+            toggleText.innerText = "Already have an account?";
+        } else {
+            signupForm.style.display = "none";
+            loginForm.style.display = "block";
+            formTitle.innerText = "Login";
+            toggleText.innerText = "Don't have an account?";
+        }
+    }
+
+    function signup() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+        const password = document.getElementById("signupPassword").value.trim();
+        const error = document.getElementById("signupError");
+
+        if (name === "" || email === "" || password === "") {
+            error.innerText = "All fields are required";
+            return;
+        }
+
+        if (password.length < 6) {
+            error.innerText = "Password must be at least 6 characters";
+            return;
+        }
+
+        alert("Signup successful!");
+        error.innerText = "";
+    }
+
+    function login() {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const error = document.getElementById("loginError");
+
+        if (email === "" || password === "") {
+            error.innerText = "All fields are required";
+            return;
+        }
+
+        alert("Login successful!");
+        error.innerText = "";
+    }
+</script>
+
+</body>
+</html>
